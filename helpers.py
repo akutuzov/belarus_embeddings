@@ -10,9 +10,8 @@ from sklearn.decomposition import PCA
 def load_model(embeddings_file, fasttext=False):
     if fasttext:
         emb_model = gensim.models.fasttext.load_facebook_vectors(embeddings_file)
-        return emb_model
     # Определяем формат модели по её расширению:
-    if embeddings_file.endswith(".bin.gz") or embeddings_file.endswith(
+    elif embeddings_file.endswith(".bin.gz") or embeddings_file.endswith(
         ".bin"
     ):  # Бинарный формат word2vec
         emb_model = gensim.models.KeyedVectors.load_word2vec_format(
@@ -29,9 +28,8 @@ def load_model(embeddings_file, fasttext=False):
         )
     else:  # Нативный формат Gensim?
         emb_model = gensim.models.Word2Vec.load(embeddings_file)
-    emb_model.init_sims(
-        replace=True
-    )  # На всякий случай приводим вектора к единичной длине (нормируем)
+    # На всякий случай приводим вектора к единичной длине (нормируем)
+    emb_model.init_sims(replace=True)
     return emb_model
 
 

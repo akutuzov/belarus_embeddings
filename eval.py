@@ -25,10 +25,10 @@ model = load_model(modelfile, fasttext=fasttext)
 print(f"Model vocabulary: {len(model.wv.vocab)}")
 
 similarities = model.wv.evaluate_word_pairs(
-    simfile, dummy4unknown=True, restrict_vocab=300000
+    simfile, dummy4unknown=True, restrict_vocab=3000000
 )
 analogies = model.wv.evaluate_word_analogies(
-    analogfile, restrict_vocab=30000, dummy4unknown=True
+    analogfile, restrict_vocab=300000, dummy4unknown=True
 )
 
 spearman = similarities[1][0]
